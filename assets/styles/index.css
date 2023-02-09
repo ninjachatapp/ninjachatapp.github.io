@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+  background: linear-gradient(120deg, #614385, #516395);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .msgdiv {
+  width: 800px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+body .msgdiv p#pma {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+body .msgdiv #processing {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: rgb(12, 12, 12);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+}
+body .msgdiv .proc {
+  opacity: 0;
+}
+body .msgdiv #messages {
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+  gap: 10px;
+}
+body .msgdiv #messages .message {
+  background-color: rgb(233, 233, 233);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+  gap: 10px;
+  padding: 0.4rem 0;
+  border-radius: 10px;
+}
+body .msgdiv #messages .message p {
+  margin: 0;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+body .msgdiv #messages .message p:first-child {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+body .msgdiv #messages .yours {
+  background-color: #4e89fd;
+  color: white;
+}
+body .msgdiv .inputbar {
+  padding: 1rem;
+  border-top: 2px solid rgb(240, 240, 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+body .msgdiv .inputbar input {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(238, 238, 238);
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 5px;
+}
+body .msgdiv .inputbar input:focus {
+  outline: none;
+}
+body .msgdiv .inputbar button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  padding: 0;
+  background-color: #080808;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+}
+body .msgdiv .inputbar button:hover {
+  opacity: 0.8;
+}/*# sourceMappingURL=index.css.map */

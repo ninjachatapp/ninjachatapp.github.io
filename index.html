@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NinjaChat</title>
+    <script src="https://kit.fontawesome.com/3149170a21.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/styles/index.css">
+</head>
+<body>
+    <section class="msgdiv">
+        <p id="pma">Posting messages as <span id="authorname"></span> <a href="#" onclick="localStorage.removeItem('authorname'); window.location.reload()">Logout</a></p>
+        <p id="processing" class="proc">Processing...</p>
+        <div id="messages">
+            
+        </div>
+        <div class="inputbar">
+            <input type="text" placeholder="Enter Message Here" id="msg">
+            <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </section>
+
+    <script src="chat.js"></script>
+</body>
+</html>
