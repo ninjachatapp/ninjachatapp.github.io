@@ -1,13 +1,13 @@
-let workinprogress = true;
+let workinprogress = false;
 
 if (workinprogress) {
     window.location.replace('workinprogress.html')
 }
 
-if (!localStorage.getItem('authorname')) {
+if (!localStorage.getItem('auth')) {
     window.location.replace('signup.html')
 }
-document.getElementById('authorname').textContent = localStorage.getItem('authorname')
+document.getElementById('authorname').textContent = localStorage.getItem('auth')
 
 
 let baseURL = 'https://ninjachat.pythonanywhere.com/';
@@ -32,10 +32,14 @@ function getAll() {
 
                 let newMsg = document.createElement('div');
                 newMsg.classList.add('message');
-                if (decodeURIComponent(curr.author) == localStorage.getItem('authorname')) {
+                if (decodeURIComponent(curr.author) == localStorage.getItem('auth')) {
                     newMsg.classList.add('yours')
                 }
-                newMsg.innerHTML = `<p class="author">${decodeURIComponent(curr.author)}</p><p class="content">${decodeURIComponent(curr.message)}</p>`
+                currauth = curr.author;
+                if (currauth == "Rohit") {
+                    currauth = `${currauth} <span>(admin)</span>`
+                }
+                newMsg.innerHTML = `<p class="author">${decodeURIComponent(currauth)}</p><p class="content">${decodeURIComponent(curr.message)}</p>`
 
                 messages.appendChild(newMsg)
             }
@@ -47,7 +51,7 @@ function getAll() {
 
 function send(msg) {
     msg = encodeURIComponent(msg)
-    fetch(`${baseURL}/${msg}/${encodeURIComponent(localStorage.getItem('authorname'))}`)
+    fetch(`${baseURL}/postmessage/${msg}/${encodeURIComponent(localStorage.getItem('auth'))}`)
     .then((response) => response.json())
     .then(json => {
         console.log(json)
@@ -78,8 +82,36 @@ function getcurrid() {
         }
     })
 }
+function requestPerms() {
+    fetch(`${baseURL}/openrequest/${localStorage.getItem("auth")}/member`)
+    .then((response) => response.json())
+    .then(json => {
+        console.log(json)
+        if (json.data == "existing request found") {
+            alert("You have already submitted a request!")
+        } else {
+            alert("Successfully sent request")
+        }
+    })
+}
+function checkPerms() {
+    fetch(`${baseURL}/checkperms/${localStorage.getItem("auth")}`)
+    .then((response) => response.json())
+    .then(json => {
+        if (json.data == "viewer") {
+            document.getElementById("inputbar").style.display = "none";
+            document.getElementById("authorname").style.display = "none";
+            document.getElementById("pma").innerHTML = "You do not have the permissions to send messages. <a href='#' onclick='requestPerms()'>Request Perms</a> <a href='#' onclick='localStorage.clear(); window.location.reload()'>Logout</a>";
+        } else if (json.data == "admin") {
+            if (!localStorage.getItem("adminkey")) {
+                localStorage.setItem("adminkey", "411master");
+            }
+        }
+    })
+}
 getAll();
 getcurrid();
+checkPerms();
 
 function sendMessage() {
     let msg = document.getElementById('msg').value;
@@ -96,7 +128,7 @@ function sendMessage() {
     }
 }
 
-
+getAll();
 setInterval(() => {
     console.log('hi!')
     getcurrid();
