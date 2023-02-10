@@ -1,3 +1,9 @@
+let workinprogress = true;
+
+if (workinprogress) {
+    window.location.replace('workinprogress.html')
+}
+
 if (!localStorage.getItem('authorname')) {
     window.location.replace('signup.html')
 }
