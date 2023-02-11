@@ -48,13 +48,56 @@ body .left-bar div.curr-chat p:first-child {
   font-size: 1rem;
   font-weight: 400;
 }
+body .left-bar .admin {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 75%;
+}
+body .left-bar .admin p {
+  margin: 0.2rem 0;
+}
+body .left-bar .admin .atitle {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+body .left-bar .admin .request {
+  margin: 0.5rem 0;
+  border: 2px solid rgb(240, 240, 240);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+body .left-bar .admin .request p span {
+  font-weight: 600;
+}
+body .left-bar .admin button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #080808;
+  padding: 1rem;
+}
 body .left-bar button {
   width: calc(100% - 20px);
-  height: 30px;
+  height: 40px;
   background-color: #4e89fd;
   border: none;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
 }
 body .msgdiv {
   overflow-x: hidden !important;
@@ -70,6 +113,7 @@ body .msgdiv {
   height: 100%;
   width: 100%;
   max-width: 70%;
+  padding-bottom: 0 !important;
 }
 body .msgdiv p#pma {
   position: absolute;

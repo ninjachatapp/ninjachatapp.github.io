@@ -1,3 +1,4 @@
+document.getElementById("adminpanel").style.display = "none"
 let workinprogress = false;
 
 if (workinprogress) {
@@ -14,7 +15,7 @@ let baseURL = 'https://ninjachat.pythonanywhere.com/';
 
 function getAll() {
 
-    fetch(`${baseURL}/getall`)
+    fetch(`${baseURL}/getrecent`)
     .then((response) => response.json())
     .then(json => {
         let messages = document.getElementById('messages');
@@ -39,7 +40,14 @@ function getAll() {
                 if (currauth == "Rohit") {
                     currauth = `${currauth} <span style='font-weight: 500; font-size: 0.9rem'>(admin)</span>`
                 }
-                newMsg.innerHTML = `<p class="date">${curr.time} GMT</p><p class="author">${decodeURIComponent(currauth)}</p><p class="content">${decodeURIComponent(curr.message)}</p>`
+                let msg;
+                try {
+                    msg = decodeURIComponent(curr.message);
+                }
+                catch {
+                    msg = curr.message
+                }
+                newMsg.innerHTML = `<p class="date">${curr.time} GMT</p><p class="author">${decodeURIComponent(currauth)}</p><p class="content">${msg}</p>`
 
                 messages.appendChild(newMsg)
             }
@@ -48,7 +56,44 @@ function getAll() {
         }
 })
 }
+function acceptRequest(username, req) {
+    fetch(`${baseURL}/grant${req}/${username}/${localStorage.getItem("adminkey")}`)
+    .then((response) => response.json())
+    .then(json => {
+        let data = json.data;
 
+        if (json.data = "success") {
+            console.log("successfully granted perms!");
+            window.location.reload()
+        }
+    })
+}
+function getAllRequests() {
+    fetch(`${baseURL}/getallrequests/${localStorage.getItem("adminkey")}`)
+    .then((response) => response.json())
+    .then(json => {
+        let data = json.data;
+        document.getElementById("admin").innerHTML = ""
+
+        if (data.length == 0) {
+            document.getElementById("admin").textContent = "No member requests."
+        }
+
+        for (i in data) {
+            let curr = data[i];
+
+            let div = document.createElement("div");
+            div.classList.add("request");
+            div.innerHTML = `<p><span>${curr.username}</span> wants to be a ${curr.req}</p>`
+            let btn = document.createElement("button");
+            btn.innerHTML = `<i class="fa-solid fa-check"></i>`
+            btn.setAttribute('onclick', `acceptRequest('${curr.username}', '${curr.req}')`);
+            div.appendChild(btn)
+            document.getElementById("admin").appendChild(div)
+        }
+    })
+}
+getAllRequests()
 function send(msg) {
     msg = encodeURIComponent(msg)
     fetch(`${baseURL}/postmessage/${msg}/${encodeURIComponent(localStorage.getItem('auth'))}`)
@@ -65,7 +110,7 @@ function getcurrid() {
         let id = json.data;
         let currid = localStorage.getItem('currid');
 
-        console.log(id, currid, (!id == currid))
+        // console.log(id, currid, (!id == currid))
 
         if (!currid) {
             localStorage.setItem('currid', id);
@@ -101,11 +146,13 @@ function checkPerms() {
         if (json.data == "viewer") {
             document.getElementById("inputbar").style.display = "none";
             document.getElementById("authorname").style.display = "none";
-            document.getElementById("pma").innerHTML = "You do not have the permissions to send messages. <a href='#' onclick='requestPerms()'>Request Perms</a> <a href='#' onclick='localStorage.clear(); window.location.reload()'>Logout</a>";
+            document.getElementById("pma").innerHTML = "You do not have the permissions to send messages.";
+            document.getElementById('reqpermbtn').style.display = 'block';
         } else if (json.data == "admin") {
             if (!localStorage.getItem("adminkey")) {
                 localStorage.setItem("adminkey", "411master");
             }
+            document.getElementById("adminpanel").style.display = "flex"
         }
     })
 }
@@ -130,6 +177,5 @@ function sendMessage() {
 
 getAll();
 setInterval(() => {
-    console.log('hi!')
     getcurrid();
 }, 5000);

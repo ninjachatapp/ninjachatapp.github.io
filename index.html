@@ -19,8 +19,14 @@
             <p>Currently chatting in</p>
             <p>AGW. Group Chat</p>
         </div>
-        <p id="pma" style="margin: 0.75rem 0;">Posting messages as <span id="authorname"></span></p>
+        <p id="pma" style="margin: 0.75rem 0; text-align: center;">Posting messages as <span id="authorname"></span></p>
+        <button style="background-color: #080808; margin-bottom: 0.3rem; display: none;" id="reqpermbtn" onclick="requestPerms()">Request Perms</button>
         <button onclick="localStorage.clear(); window.location.reload()">Logout</button>
+        <div class="admin" id="adminpanel">
+            <p class="atitle">Admin Panel</p>
+            <div class="admin-section" id="admin">
+            </div>
+        </div>
     </div>
     <section class="msgdiv">
         <p id="processing" class="proc">Processing...</p>
