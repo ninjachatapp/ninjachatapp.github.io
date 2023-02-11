@@ -37,9 +37,9 @@ function getAll() {
                 }
                 currauth = curr.author;
                 if (currauth == "Rohit") {
-                    currauth = `${currauth} <span>(admin)</span>`
+                    currauth = `${currauth} <span style='font-weight: 500; font-size: 0.9rem'>(admin)</span>`
                 }
-                newMsg.innerHTML = `<p class="author">${decodeURIComponent(currauth)}</p><p class="content">${decodeURIComponent(curr.message)}</p>`
+                newMsg.innerHTML = `<p class="date">${curr.time} GMT</p><p class="author">${decodeURIComponent(currauth)}</p><p class="content">${decodeURIComponent(curr.message)}</p>`
 
                 messages.appendChild(newMsg)
             }
