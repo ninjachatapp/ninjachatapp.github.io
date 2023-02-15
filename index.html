@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerChat</title>
+    <script src="https://kit.fontawesome.com/3149170a21.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/styles/index.css">
+</head>
+<body>
+    <button id="themeswitch" onclick="themeSwitch()"><i class="fa-solid fa-moon"></i></button>
+    <div class="admin-panel">
+
+    </div>
+
+    <!-- <p style="position: absolute; bottom: 0; color: white; font-weight: 600;">NinjaChat is currently undergoing Frontend Reconstruction. However, Database reconstruction is complete. Feel free to send a perms request and you will be approved shortly.</p> -->
+    <div class="left-bar">
+        <div class="curr-chat">
+            <p>Currently peerchatting in</p>
+            <p>AGWaters School Chat</p>
+        </div>
+        <p id="pma" style="margin: 0.75rem 0; text-align: center;">Posting messages as <span id="authorname"></span></p>
+        <button style="background-color: #080808; margin-bottom: 0.3rem; display: none;" id="reqpermbtn" onclick="requestPerms()">Request Perms</button>
+        <button onclick="localStorage.clear(); window.location.reload()">Logout</button>
+        <div class="admin" id="adminpanel">
+            <p class="atitle">Admin Panel</p>
+            <div class="admin-section" id="admin">
+            </div>
+        </div>
+    </div>
+    <section class="msgdiv">
+        <p id="processing" class="proc">Processing...</p>
+        <div id="messages">
+            
+        </div>
+        <div class="inputbar" id="inputbar">
+            <input type="text" placeholder="Enter Message Here" id="msg">
+            <button onclick="sendMessage()" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </section>
+
+    <script src="chat.js"></script>
+    <script src="themeswitch.js"></script>
+</body>
+</html>
